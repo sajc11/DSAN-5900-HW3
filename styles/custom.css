@@ -10,8 +10,7 @@
   }
 
   body {
-    background-color:#aabdd0; /* Light background for better contrast */
-    font-family: 'Nunito', sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     overflow-x: hidden;
   }
   
