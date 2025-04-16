@@ -1,1 +1,1 @@
-Sitemap: https://sajc11.quarto.pub/dsan-5900-hw3/sitemap.xml
+Sitemap: https://sajc11.github.io/DSAN-5900-HW3/sitemap.xml

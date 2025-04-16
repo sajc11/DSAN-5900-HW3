@@ -21,25 +21,23 @@ execute:
 
 ```{python}
 #| echo: false
-#| include: true
-
-# Initialize Altair for proper rendering
-import altair as alt
+#| global: true
+import sys
 import os
+import altair as alt
 
-# Set renderer to default for Quarto/Jupyter compatibility
+# Add root to path so utils/ can be imported
+sys.path.append(os.path.abspath("."))
+
 alt.renderers.enable('default')
-
-# Ensure output directory exists
 os.makedirs("outputs", exist_ok=True)
 
-# Import visualization modules
+# Import visualization functions
 from py.photo_effect_plot import plot_photo_effect
 from py.case_type_bar import plot_case_type
 from py.income_dot_map import plot_income_dot_map
 from py.income_choropleth import plot_income_choropleth
 from py.subset_selection_plot import plot_subset_selection
-
 ```
 
 
