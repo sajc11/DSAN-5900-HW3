@@ -87,7 +87,9 @@
   }
   
   .qr-container img {
-    width: 160px;
+    max-width: 100%;
+    height: auto;
+    width: 650px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
@@ -106,9 +108,15 @@
     
     .iframe-viz {
       height: 450px;
+      width: 90%;
     }
     
     .download-link {
       margin-bottom: 2rem;
+    }
+
+    .qr-container img {
+        height: 450px;
+        width: 90%;
     }
   }
