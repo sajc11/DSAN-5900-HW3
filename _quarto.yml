@@ -12,7 +12,7 @@ resources:
   - js/quiz.js
   - js/d3.v7.js
   - js/gallery.js
-  - data/311_map_data.csv
+  - "!data/311_map_data.csv"   # 🚫 EXCLUDE this
   - data/neighborhood_income_centroids.csv
   - data/SF_Find_Neighborhoods_2025.geojson
   - data/data_gallery_info.json
