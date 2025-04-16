@@ -1,0 +1,86 @@
+---
+title: "Data Visualization Gallery"
+format:
+  html:
+    embed-resources: true
+    self-contained: true
+    toc: true
+    toc-depth: 2
+    css: 
+      - styles/custom.css
+      - styles/gallery-styles.css
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+execute:
+  echo: false
+  warning: false
+  error: false
+---
+
+# Explore Key Visual Insights
+
+Each visualization offers a window into a specific facet of service delivery — from racial disparity to resolution timing and neighborhood inequalities. Filter below to focus on what interests you.
+
+<div id="viz-filter-container">
+  <button class="active-filter" data-type="All">All</button>
+  <button data-type="Bar: Horizontal">Bar: Horizontal</button>
+  <button data-type="Bar: Vertical">Bar: Vertical</button>
+  <button data-type="Line Chart">Line Charts</button>
+  <button data-type="Heatmap">Heatmaps</button>
+  <button data-type="Ranked Table">Ranked Tables</button>
+</div>
+
+<div id="viz-gallery" class="gallery-grid"></div>
+
+<!-- Modal Structure -->
+<div id="viz-modal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modal-image">
+  <div id="modal-caption"></div>
+</div>
+
+<!-- Debug container to check if JS is loading -->
+<div id="debug-container" style="display: none;"></div>
+
+<!-- Script with defer attribute to ensure DOM is loaded -->
+<script defer src="js/gallery.js"></script>
+
+<!-- Fallback loader for gallery -->
+<script>
+  // Add a loading indicator
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if gallery container exists
+    const galleryContainer = document.getElementById('viz-gallery');
+    if (galleryContainer) {
+      // Add a loading message if gallery is empty
+      if (galleryContainer.children.length === 0) {
+        galleryContainer.innerHTML = '<div class="loading-indicator">Loading visualizations...</div>';
+        
+        // Set a timeout to check if gallery loaded
+        setTimeout(function() {
+          if (galleryContainer.querySelector('.loading-indicator')) {
+            const debugContainer = document.getElementById('debug-container');
+            if (debugContainer) {
+              debugContainer.style.display = 'block';
+              debugContainer.innerHTML = '<div class="error-message">Gallery failed to load. Check browser console for errors.</div>';
+              
+              // Check if gallery.js loaded
+              const scriptElement = document.querySelector('script[src="js/gallery.js"]');
+              if (!scriptElement) {
+                debugContainer.innerHTML += '<p>Could not find gallery.js script.</p>';
+              }
+              
+              // Try to reload the script
+              const newScript = document.createElement('script');
+              newScript.src = 'js/gallery.js';
+              document.body.appendChild(newScript);
+            }
+          }
+        }, 3000);
+      }
+    }
+  });
+</script>

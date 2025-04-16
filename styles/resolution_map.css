@@ -1,0 +1,168 @@
+/* resolution_map.css - Main styling for the resolution map visualization */
+
+/* Container styling */
+#map-container {
+    width: 100%;
+    height: 650px;
+    position: relative;
+    margin: 0 auto;
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  /* SVG styling */
+  #map-container svg {
+    width: 100%;
+    height: 100%;
+    background-color: #f9f9f9;
+  }
+  
+  /* Tooltip styling */
+  .tooltip {
+    position: absolute;
+    background-color: white;
+    padding: 0.8rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    pointer-events: none;
+    font-size: 0.9rem;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    color: #333333;
+    max-width: 300px;
+    line-height: 1.4;
+    transition: opacity 0.3s ease;
+  }
+  
+  .tooltip strong {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.3rem;
+    display: block;
+    font-size: 1rem;
+  }
+  
+  /* Toggle controls styling */
+  .toggle {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .photo-toggle-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 1.2rem;
+    margin: 0 0.5rem;
+    border: 2px solid #4a89dc;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #4a89dc;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .photo-toggle-btn:hover {
+    background-color: rgba(74, 137, 220, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .photo-toggle-btn.active {
+    background-color: #4a89dc;
+    color: white;
+    box-shadow: 0 4px 8px rgba(74, 137, 220, 0.3);
+  }
+  
+  /* Map elements styling */
+  #map-container path {
+    transition: fill 0.3s ease;
+  }
+  
+  #map-container circle {
+    transition: r 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+  
+  /* Legend styling */
+  .legend-title {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #555;
+  }
+  
+  .legend-axis text {
+    font-size: 10px;
+    fill: #666;
+  }
+  
+  .legend-axis path, .legend-axis line {
+    stroke: #ccc;
+  }
+  
+  /* Map title styling */
+  .map-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-anchor: middle;
+    fill: #2c3e50;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    padding: 20px;
+    text-align: center;
+    color: #b00020;
+    font-weight: bold;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .toggle {
+      top: 5px;
+    }
+    
+    .photo-toggle-btn {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.3rem;
+    }
+    
+    .tooltip {
+      padding: 0.6rem;
+      font-size: 0.8rem;
+      max-width: 250px;
+    }
+    
+    #map-container {
+      height: 450px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .toggle {
+      width: 90%;
+    }
+    
+    .photo-toggle-btn {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+    }
+    
+    .map-title {
+      font-size: 14px;
+    }
+  }

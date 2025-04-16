@@ -1,0 +1,107 @@
+[
+    {
+      "topic": "Photo Evidence",
+      "question": "What is the effect of photo evidence on resolution speed?",
+      "options": ["Speeds it up", "Slows it down", "No effect"],
+      "answer": 0,
+      "explanation": "Photo evidence helps city workers understand the issue faster and resolve it more efficiently."
+    },
+    {
+      "topic": "Photo Evidence",
+      "question": "According to the study, what effect does photo evidence have on the resolution rate of 311 cases?",
+      "options": ["Lower resolution rate", "Higher resolution rate", "No significant difference"],
+      "answer": 1,
+      "explanation": "The study found that cases with photographic evidence have a higher resolution rate compared to those without photos."
+    },
+    {
+      "topic": "Regression Models",
+      "question": "Which regression method was used to handle overdispersion?",
+      "options": ["Linear Regression", "Negative Binomial Regression", "Lasso Regression"],
+      "answer": 1,
+      "explanation": "Negative Binomial Regression was used because the data had overdispersion (variance > mean)."
+    },
+    {
+      "topic": "Regression Models",
+      "question": "Which model produced the least Mean Squared Error (MSE) for both the 'number of cases' and 'resolution rate' problems?",
+      "options": ["Linear Regression", "Lasso Regression", "Ridge Regression"],
+      "answer": 2,
+      "explanation": "Ridge Regression produced the least MSE for both prediction problems, likely due to its ability to handle multicollinearity in the dataset."
+    },
+    {
+      "topic": "Race Factors",
+      "question": "How does racial composition affect resolution time?",
+      "options": ["No effect", "Statistically significant", "Only in low-income areas"],
+      "answer": 1,
+      "explanation": "Linear regression showed statistically significant relationships between racial composition and resolution time."
+    },
+    {
+      "topic": "Race Factors",
+      "question": "Which demographic variable was identified as a significant predictor of the number of cases?",
+      "options": ["Asian population percentage", "White population percentage", "Black population percentage"],
+      "answer": 2,
+      "explanation": "The study found that the proportion of Black residents was one of the four key factors that influenced the number of cases."
+    },
+    {
+      "topic": "Resolution Time",
+      "question": "What statistical test was used to compare resolution times between cases with and without photos?",
+      "options": ["T-test", "Chi-squared test", "Wilcoxon rank sum test"],
+      "answer": 2,
+      "explanation": "The Wilcoxon rank sum test was used to compare resolution time distributions without assuming normality of the data."
+    },
+    {
+      "topic": "311 Service",
+      "question": "Where was the 311 non-emergency service first introduced in the United States?",
+      "options": ["New York", "San Francisco", "Baltimore"],
+      "answer": 2,
+      "explanation": "The paper mentions that 311 was first introduced by Baltimore, aimed at relieving the burden on 911 and providing a centralized point of public service contact."
+    },
+    {
+      "topic": "Data Analysis Methods",
+      "question": "What technique was used to analyze the common themes in service requests?",
+      "options": ["Principal Component Analysis", "Topic Modeling with LDA", "Cluster Analysis"],
+      "answer": 1,
+      "explanation": "Topic Modeling with LDA (Latent Dirichlet Allocation) was applied to the case and request columns to identify common themes."
+    },
+    {
+      "topic": "Feature Selection",
+      "question": "How many features were ultimately selected as optimal for predicting both the number of cases and resolution rate?",
+      "options": ["2 features", "4 features", "7 features"],
+      "answer": 1,
+      "explanation": "After comparing different selection criteria, the study concluded that models with 4 features provided the optimal balance for both prediction tasks."
+    },
+    {
+      "topic": "Resolution Rates",
+      "question": "Which case types had the highest resolution rates according to the analysis?",
+      "options": ["Damaged Property cases", "Abandoned Vehicle cases", "Construction Zone Permits"],
+      "answer": 1,
+      "explanation": "The study found that 311 External Request, Abandoned Vehicle, and Blocked Street or Sidewalk cases had high resolution rates."
+    },
+    {
+      "topic": "Data Science Methods",
+      "question": "What transformation was applied to resolution times before statistical analysis?",
+      "options": ["Square root transformation", "Logarithmic transformation", "No transformation"],
+      "answer": 1,
+      "explanation": "Resolution times were log-transformed to make extreme values more normally distributed and enable more meaningful comparisons."
+    },
+    {
+      "topic": "Trends Over Time",
+      "question": "What happened to the average resolution rate in 2017 according to the time series analysis?",
+      "options": ["It remained stable", "It increased significantly", "It declined drastically"],
+      "answer": 2,
+      "explanation": "The study noted that in 2017, the average resolution rate declined drastically, possibly related to changed policies or events at that time."
+    },
+    {
+      "topic": "Cross-Validation",
+      "question": "Why was K-fold cross-validation preferred over simple cross-validation in the study?",
+      "options": ["It's faster to compute", "It's more robust and reliable", "It requires less data"],
+      "answer": 1,
+      "explanation": "The researchers noted that K-fold validation is more robust than simple cross-validation, though it can have greater computational costs with large datasets."
+    },
+    {
+      "topic": "Model Selection",
+      "question": "Why was Ridge Regression particularly suitable for this dataset?",
+      "options": ["It's faster than other methods", "It handles multicollinearity between variables", "It automatically selects the best features"],
+      "answer": 1,
+      "explanation": "Ridge Regression was suitable because it handles multicollinearity well, which existed in this dataset where variables like racial demographics and population metrics were correlated."
+    }
+]

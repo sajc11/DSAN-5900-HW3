@@ -1,0 +1,221 @@
+---
+title: "Methods"
+format:
+  html:
+    embed-resources: true
+    self-contained: true
+    toc: true
+    toc-depth: 3
+    css: 
+      - styles/custom.css
+      - styles/methods-page.css
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+execute:
+  echo: false
+  warning: false
+  error: false
+---
+
+```{python}
+# Initialize Altair for proper rendering
+import altair as alt
+import os
+
+# Set renderer to default for Quarto/Jupyter compatibility
+alt.renderers.enable('default')
+
+# Ensure output directory exists
+os.makedirs("outputs", exist_ok=True)
+
+# Import visualization modules
+from py.photo_effect_plot import plot_photo_effect
+from py.case_type_bar import plot_case_type
+from py.income_dot_map import plot_income_dot_map
+from py.income_choropleth import plot_income_choropleth
+from py.subset_selection_plot import plot_subset_selection
+```
+
+# Behind the Dashboard: Our Analytical Journey
+
+We approached this project as storytellers, not just statisticians. Our goal wasn't just to model numbers — it was to uncover patterns of equity and inequality in the delivery of public services. Here's how we did it.
+
+<div class="centered-image">
+  <img src="assets/images/pothole_example.jpg" alt="Pothole request photo">
+  <p class="image-caption">Every data point begins with a real request, like this pothole report from SF 311.</p>
+</div>
+
+<div class="section-break"></div>
+
+## 1. Exploratory Data Analysis (EDA)
+
+We started by letting the data speak.
+
+- How often are cases opened in each neighborhood?
+- Are certain types resolved more reliably?
+- Does submitting a photo really help?
+
+We used bar charts, dot maps, and choropleths to bring these questions to life.
+
+<div class="centered-image">
+  <img src="assets/images/static_viz/resolution_rate_by_selected_case_types.png" alt="Resolution Rate by Case Type">
+  <p class="image-caption">Case type matters: Some requests are always resolved. Others? Almost never.</p>
+</div>
+
+<div class="section-break"></div>
+
+## 2. Hypothesis Testing
+
+Visuals gave us clues. Statistics gave us confidence.
+
+<div class="method-box">
+  <h4>Statistical Tests</h4>
+  <p><strong>Wilcoxon Rank Sum Test</strong><br>
+  → Confirmed: Photo submissions lead to faster resolutions (<strong>p < 0.001</strong>)</p>
+
+  <p><strong>Chi-Squared Test</strong><br>
+  → Confirmed: Photo presence significantly associated with resolution success</p>
+</div>
+
+We also observed race-based differences that demanded closer modeling attention.
+
+<div class="section-break"></div>
+
+## 3. Regression Modeling
+
+We needed to go deeper.
+
+<div class="method-box">
+  <h4>Modeling Approaches</h4>
+  
+  <p><strong>Negative Binomial Regression</strong></p>
+  <ul>
+    <li>Modeled <strong>counts of cases</strong> per neighborhood</li>
+    <li>Controlled for overdispersion</li>
+    <li>Revealed: Case type, income, and demographics significantly affect service likelihood</li>
+  </ul>
+  
+  <p><strong>Ridge & Lasso Regression</strong></p>
+  <ul>
+    <li>Modeled <strong>resolution rates</strong></li>
+    <li>Addressed multicollinearity in demographic predictors</li>
+    <li>Lasso shrank complexity, Ridge gave robustness</li>
+  </ul>
+</div>
+
+<div class="centered-image">
+  <img src="assets/images/static_viz/correlation_heatmap_r2_annotated_only.png" alt="Correlation heatmap">
+  <p class="image-caption">Income and race correlate strongly with resolution rates — but correlation isn't causation.</p>
+</div>
+
+<div class="section-break"></div>
+
+## 4. Feature Selection
+
+We tested dozens of combinations to balance complexity and explanatory power.
+
+<div class="visualization-container">
+```{python}
+plot_subset_selection()
+```
+</div>
+
+<div class="download-link">
+  <a href="outputs/subset_selection_chart.html" download>Download interactive chart as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## 5. Geospatial Methods
+
+Place matters.
+
+<div class="method-box">
+  <h4>Geospatial Visualization Techniques</h4>
+  <p><strong>Dot Map</strong> - Shows income per neighborhood at its centroid</p>
+</div>
+
+<div class="visualization-container">
+```{python}
+plot_income_dot_map()
+```
+</div>
+
+<div class="download-link">
+  <a href="outputs/income_dot_map.html" download>Download interactive map as HTML</a>
+</div>
+
+<div class="method-box">
+  <h4>Choropleth Mapping</h4>
+  <p><strong>Choropleth</strong> - Visualizes income inequality across geographic boundaries</p>
+</div>
+
+<iframe 
+  src="outputs/income_choropleth.html" 
+  class="iframe-viz" 
+  sandbox="allow-scripts allow-same-origin"
+></iframe>
+
+
+<div class="download-link">
+  <a href="outputs/income_choropleth.html" download>Download map as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## 6. JavaScript Interactivity
+
+Data alone isn't enough — it must engage.
+
+<div class="method-box">
+  <h4>Interactive Components</h4>
+  
+  <p><strong>D3 Resolution Map</strong></p>
+  <p>An interactive map powered by D3.js lets users:</p>
+  <ul>
+    <li>Hover to see neighborhood data</li>
+    <li>Toggle by photo evidence</li>
+    <li>Reveal hotspots of inefficiency</li>
+  </ul>
+  <p class="file-path">📁 Source: js/resolution_map.js</p>
+  
+  <p><strong>Visualization Gallery</strong></p>
+  <p>Like a visual journal, our gallery uses JavaScript + JSON to filter and zoom through our EDA snapshots.</p>
+  <p class="file-path">📁 Code: js/gallery.js</p>
+  <p class="file-path">📁 Data: data/data_gallery_info.json</p>
+  <p class="file-path">📁 Images: assets/images/static_viz/</p>
+  
+  <p><strong>Interactive Quiz</strong></p>
+  <p>We built a custom JavaScript quiz that:</p>
+  <ul>
+    <li>Randomly picks 3 questions per attempt</li>
+    <li>Celebrates correct answers with confetti 🎉</li>
+    <li>Offers supportive feedback and replay</li>
+  </ul>
+  <p class="file-path">📁 File: quiz.qmd</p>
+  <p class="file-path">🎉 Library: canvas-confetti</p>
+</div>
+
+<div class="section-break"></div>
+
+## Tools and Technology
+
+We stitched this project together with care — and code:
+
+<div class="method-box">
+  <h4>Tech Stack</h4>
+  <ul>
+    <li><strong>Languages</strong>: Python + R + JavaScript</li>
+    <li><strong>Python</strong>: Altair, Pandas, Folium, GeoPandas, SciPy, Statsmodels</li>
+    <li><strong>R</strong>: <code>glmnet</code>, <code>MASS</code>, <code>ggplot2</code></li>
+    <li><strong>JS</strong>: D3.js, plain DOM scripting</li>
+  </ul>
+</div>
+
+<div class="qr-container">
+  <img src="assets/images/qr_code.jpg" alt="QR code to open dashboard">
+  <p>Scan to access the live dashboard and explore the story yourself.</p>
+</div>

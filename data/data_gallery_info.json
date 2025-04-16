@@ -1,0 +1,38 @@
+[
+    {
+      "title": "Resolution Rate by Selected Case Types",
+      "visualization_type": "Horizontal Bar Chart",
+      "summary": "Displays average resolution rates for various case types, highlighting top (100%) and bottom (0–1%) performers.",
+      "interpretation": "General Requests like CONVENTION FACILITIES and AGING ADULT SERVICES are resolved perfectly, while Abandoned Vehicle and Color Curb cases have extremely low resolution rates, suggesting operational inefficiencies or deprioritization.",
+      "path": "assets/images/static_viz/resolution_rate_by_selected_case_types.png"
+    },
+    {
+      "title": "Top 10 Most Frequent Cases with Avg Resolution Rate",
+      "visualization_type": "Ranked Table",
+      "summary": "Lists the most frequently reported case types with their resolution counts and average resolution rates.",
+      "interpretation": "High-frequency cases like Street and Sidewalk Cleaning have relatively high resolution rates (0.88), while common but low-performing cases like Abandoned Vehicle and MUNI Feedback show poor resolution outcomes.",
+      "path": "assets/images/static_viz/top_10_most_frequent_cases_with_avg_resolution_rate.png"
+    },
+    {
+      "title": "Correlation Heatmap (|r| ≥ 0.2 Annotated Only)",
+      "visualization_type": "Correlation Heatmap",
+      "summary": "Displays Pearson correlations between numeric and demographic variables, annotated for correlations ≥ 0.2.",
+      "interpretation": "Resolution rate positively correlates with income (0.74) and the proportion of white and Asian residents, suggesting potential demographic disparities in case resolutions.",
+      "path": "assets/images/static_viz/correlation_heatmap_r2_annotated_only.png"
+    },
+    {
+      "title": "Resolution Time by Photo Attachment",
+      "visualization_type": "Vertical Bar Chart",
+      "summary": "Compares the average time to resolution for cases with and without photo attachments.",
+      "interpretation": "Cases with photos are resolved faster (~804 hours) than those without (~1152 hours), suggesting that visual evidence may expedite processing.",
+      "path": "assets/images/static_viz/resolution_time_by_photo_attachment.png"
+    },
+    {
+      "title": "Trend of Resolution Rate Over Months (with Dotted Gaps for Predictions)",
+      "visualization_type": "Line Chart",
+      "summary": "Shows average resolution rates over time, including dotted lines for predicted or imputed values during gaps.",
+      "interpretation": "Resolution rates improved significantly from 2012 to 2013, then gradually declined post-2016, indicating possible changes in service efficiency or policy.",
+      "path": "assets/images/static_viz/trend_of_resolution_rate_over_months.png"
+    }
+  ]
+  

@@ -1,0 +1,53 @@
+{
+  "index.qmd": {
+    "index.html": "3dcc9362"
+  },
+  "gallery.qmd": {
+    "gallery.html": "7574f458"
+  },
+  "about.qmd": {
+    "about.html": "96e33bdb"
+  },
+  "methods.qmd": {
+    "methods.html": "c3377715"
+  },
+  "quiz.qmd": {
+    "quiz.html": "2a92a24c"
+  },
+  "hw3env/lib/python3.12/site-packages/idna-3.10.dist-info/LICENSE.md": {
+    "LICENSE.html": "198b3a99"
+  },
+  "hw3env/lib/python3.12/site-packages/httpcore-1.0.8.dist-info/licenses/LICENSE.md": {
+    "LICENSE.html": "0ce7ccb5"
+  },
+  "hw3env/lib/python3.12/site-packages/pyzmq-26.4.0.dist-info/licenses/LICENSE.md": {
+    "LICENSE.html": "5672b527"
+  },
+  "hw3env/lib/python3.12/site-packages/soupsieve-2.6.dist-info/licenses/LICENSE.md": {
+    "LICENSE.html": "31dc003b"
+  },
+  "hw3env/lib/python3.12/site-packages/cffi/recompiler.py": {
+    "recompiler.html": "8e0fa324"
+  },
+  "hw3env/lib/python3.12/site-packages/numpy/random/LICENSE.md": {
+    "LICENSE.html": "0d1b5166"
+  },
+  "hw3env/lib/python3.12/site-packages/toolz-1.0.0.dist-info/AUTHORS.md": {
+    "AUTHORS.html": "2f1a1d4c"
+  },
+  "hw3env/lib/python3.12/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.md": {
+    "LICENSE.html": "b81d6c87"
+  },
+  "hw3env/lib/python3.12/site-packages/QtPy-2.4.3.dist-info/AUTHORS.md": {
+    "AUTHORS.html": "aa8a91bc"
+  },
+  "hw3env/lib/python3.12/site-packages/pandas/tests/indexes/period/test_constructors.py": {
+    "test_constructors.html": "97cf92f5"
+  },
+  "hw3env/lib/python3.12/site-packages/pandas/tests/indexes/period/test_indexing.py": {
+    "test_indexing.html": "6534005f"
+  },
+  "hw3env/lib/python3.12/site-packages/pandas/tests/indexes/datetimes/test_indexing.py": {
+    "test_indexing.html": "e8ebdecc"
+  }
+}

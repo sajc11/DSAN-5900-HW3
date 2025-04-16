@@ -1,0 +1,193 @@
+---
+title: "About the Project"
+format:
+  html:
+    embed-resources: true
+    self-contained: true
+    toc: true
+    toc-depth: 3
+    css: 
+      - styles/custom.css
+      - styles/about-page.css
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+execute:
+  echo: false
+  warning: false
+  error: false
+---
+
+```{=html}
+<!-- Make sure Bootstrap is available for the carousel -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all carousels
+    var carouselElement = document.querySelector('#carousel311');
+    if (carouselElement) {
+      var carousel = new bootstrap.Carousel(carouselElement, {
+        interval: 5000,
+        wrap: true
+      });
+    } else {
+      console.error('Carousel element not found');
+    }
+    
+    // Add fallback for browsers with JavaScript disabled
+    var noscriptMessage = document.querySelector('noscript');
+    if (noscriptMessage) {
+      noscriptMessage.textContent = '';
+    }
+  });
+</script>
+```
+
+# What Happens After You Call 311?
+
+> "The true measure of any society can be found in how it treats its most vulnerable."  
+> — Mahatma Gandhi
+
+311 is a city's promise to listen. A pothole, a broken light, an abandoned sofa — each call is a signal. A test. A measure of trust.
+
+San Francisco's 311 hotline, like those in most major cities, was built to respond to everyday problems. But when half a million service requests are logged, patterns emerge — and so do disparities.
+
+This project explores the stories hiding in that data: who gets help, how fast, and why.
+
+<div class="centered-image">
+  <img src="assets/images/311-logo.png" alt="311 logo">
+  <p class="image-caption">Every dot in our data represents a resident's voice — and a test of government responsiveness.</p>
+</div>
+
+<div class="section-break"></div>
+
+## Research Questions
+
+We began with four core questions:
+
+::: {.callout-tip}
+**1. What drives the number of requests submitted in different neighborhoods?**  
+**2. What influences how quickly or reliably a case is resolved?**  
+**3. Does photo evidence increase the likelihood or speed of resolution?**  
+**4. Are there disparities based on race, income, or geography?**
+:::
+
+We also explored time trends, disparities by case type, and resolution variation across neighborhoods.
+
+<div class="section-break"></div>
+
+## The Dataset
+
+We analyzed over **519,000 records** of 311 service requests filed in San Francisco during 2012, 2014, 2016, and 2018. Each record includes:
+
+- Case type and submission method  
+- Whether a photo was attached  
+- Time to resolution and resolution status  
+- Neighborhood location and timestamp  
+- Neighborhood-level demographics: race, income, turnout
+
+These were cleaned and transformed using **Python** and **R**, joined with census data and spatial overlays, and structured for statistical analysis and storytelling.
+
+<div class="centered-image">
+  <img src="assets/images/static_viz/correlation_heatmap_r2_annotated_only.png" alt="Correlation heatmap">
+  <p class="image-caption">Income and race strongly correlate with resolution rates — but correlation isn't causation.</p>
+</div>
+
+<div class="section-break"></div>
+
+## Glimpses into 311-Reported Issues
+
+```{=html}
+<div id="carousel311" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/images/pothole_example.jpg" class="d-block w-100" alt="Pothole case">
+      <div class="carousel-caption d-none d-md-block">
+        <small>Example: Pothole Request</small>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="assets/images/static_viz/resolution_time_by_photo_attachment.png" class="d-block w-100" alt="Photo evidence impact">
+      <div class="carousel-caption d-none d-md-block">
+        <small>Impact of Photo Evidence on Resolution</small>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="assets/images/static_viz/top_10_most_frequent_cases_with_avg_resolution_rate.png" class="d-block w-100" alt="Top 311 cases">
+      <div class="carousel-caption d-none d-md-block">
+        <small>Most Frequent Case Types</small>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel311" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel311" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+```
+
+<noscript>
+  <div class="centered-image">
+    <img src="assets/images/pothole_example.jpg" alt="Pothole case">
+    <p class="image-caption">Example: Pothole Request (JavaScript disabled - carousel not available)</p>
+  </div>
+</noscript>
+
+<div class="section-break"></div>
+
+## Why It Matters
+
+The 311 system is designed for accessibility and equity. But our analysis reveals:
+
+::: {.callout-warning title="Key Findings"}
+- Some neighborhoods receive quicker and more consistent service  
+- Photo evidence significantly increases resolution likelihood  
+- Race, income, and civic turnout correlate with resolution patterns  
+:::
+
+These gaps — while subtle — matter. Because a small delay for one neighborhood might mean chronic neglect for another.
+
+<div class="centered-image">
+  <img src="assets/images/static_viz/top_10_most_frequent_cases_with_avg_resolution_rate.png" alt="Frequent case types and resolution rates">
+  <p class="image-caption">Even frequent complaints aren't treated equally across the city.</p>
+</div>
+
+<div class="section-break"></div>
+
+## Who This Is For
+
+This dashboard is built for:
+
+::: {.callout-note}
+- **Residents** who want to know how their neighborhood compares  
+- **City officials** seeking fairer resource allocation  
+- **Civic tech advocates** promoting transparency  
+- **Researchers and data scientists** interested in applied policy analysis
+:::
+
+Whether you're a policy student, data enthusiast, or simply a curious citizen — we invite you to explore.
+
+<div class="section-break"></div>
+
+## Full Research Paper
+
+Want to dive deeper into the modeling details, statistical tests, and regression coefficients?
+
+<div class="download-link">
+  <a href="documentation/311_full_paper.pdf" download>
+    <i class="fa fa-download"></i> Download the full paper (PDF)
+  </a>
+</div>
+
+<div class="section-break"></div>
+
+> "Data doesn't change the world. Stories do — especially when the data is honest, and the stories are true."
+
+Let us know if you'd like to reuse this work or bring it to your city.  
+The code is modular, the questions are transferable — and the insights can empower communities far beyond San Francisco.

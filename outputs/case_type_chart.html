@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head><meta charset="utf-8"/><title>Case Type Resolution – 311 Explorer</title><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/vega@5" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6" type="text/javascript"></script>
+</head>
+<body>
+<div id="vis"></div>
+<script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": null}, "axis": {"grid": false}, "title": {"anchor": "start", "fontSize": 16}}, "data": {"name": "data-d318aa4e936f2d44851ae3cebe5fe0b0"}, "mark": {"type": "bar"}, "encoding": {"color": {"value": "#4c78a8"}, "tooltip": [{"field": "case", "title": "Case Type", "type": "nominal"}, {"field": "resolution_rate", "format": ".1%", "title": "Resolution Rate", "type": "quantitative"}, {"field": "count", "title": "Cases Reported", "type": "quantitative"}], "x": {"axis": {"format": ".0%", "labelFontSize": 12, "title": "Resolution Rate"}, "field": "resolution_rate", "type": "quantitative"}, "y": {"axis": {"labelFontSize": 12, "labelLimit": 200}, "field": "case", "sort": "-x", "title": "Case Type", "type": "nominal"}}, "height": 300, "title": "Top 311 Case Types by Resolution Rate", "width": "container", "$schema": "https://vega.github.io/schema/vega-lite/v5.16.3.json", "datasets": {"data-d318aa4e936f2d44851ae3cebe5fe0b0": [{"case": "General Request - TAXI COMMISSION", "resolution_rate": 1.0, "count": 2}, {"case": "General Request - SHERIFF", "resolution_rate": 1.0, "count": 2}, {"case": "General Request - CONVENTION FACILITIES", "resolution_rate": 1.0, "count": 3}, {"case": "General Request - COUNTY CLERK", "resolution_rate": 1.0, "count": 1}, {"case": "General Request - DEM", "resolution_rate": 1.0, "count": 4}, {"case": "General Request - AGING ADULT SERVICES", "resolution_rate": 1.0, "count": 1}, {"case": "KB Events", "resolution_rate": 1.0, "count": 8}, {"case": "SFHA Requests", "resolution_rate": 0.9456492274329087, "count": 7378}, {"case": "DPW Volunteer Programs", "resolution_rate": 0.9393939393939394, "count": 33}, {"case": "Catch Basin Maintenance", "resolution_rate": 0.8981818181818182, "count": 825}]}};
+      var embedOpt = {"actions": true, "renderer": "svg", "scaleFactor": 2, "downloadFileName": "case_type_chart", "theme": "light", "mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

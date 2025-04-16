@@ -1,0 +1,60 @@
+project:
+  type: website
+  output-dir: _site
+
+execute:
+  freeze: auto
+  kernel: hw3env
+
+resources:
+  - documentation/311_full_paper.pdf
+  - js/resolution_map.js
+  - js/quiz.js
+  - js/d3.v7.js
+  - js/gallery.js
+  - data/311_map_data.csv
+  - data/neighborhood_income_centroids.csv
+  - data/SF_Find_Neighborhoods_2025.geojson
+  - data/data_gallery_info.json
+  - assets/images/
+  - outputs/
+  - includes/footer.html
+  - styles/  # Add this line to include all CSS files
+
+website:
+  title: "311 Resolution Explorer"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - text: Analysis
+        menu:
+          - href: methods.qmd
+            text: Methods
+          - href: quiz.qmd
+            text: Quiz
+          - href: gallery.qmd
+            text: Gallery
+      - text: Resources
+        menu:
+          - text: "📄 Download Full Paper (PDF)"
+            href: documentation/311_full_paper.pdf
+            target: _blank
+    right:
+      - text: GitHub
+        icon: github
+        href: https://github.com/anly512/5300-project-group-9
+        target: _blank
+  page-navigation: true
+
+format:
+  html:
+    theme: cosmo
+    css: styles/custom.css
+    toc: true
+    toc-depth: 2
+    code-fold: true
+    code-summary: "Show code"
+    embed-resources: true

@@ -1,0 +1,179 @@
+---
+title: "311 Hotline Resolution Explorer"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    css: 
+      - styles/custom.css
+      - styles/dashboard-page.css
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+execute:
+  echo: false
+  warning: false
+  error: false
+---
+
+```{python}
+#| echo: false
+#| include: true
+
+# Initialize Altair for proper rendering
+import altair as alt
+import os
+
+# Set renderer to default for Quarto/Jupyter compatibility
+alt.renderers.enable('default')
+
+# Ensure output directory exists
+os.makedirs("outputs", exist_ok=True)
+
+# Import visualization modules
+from py.photo_effect_plot import plot_photo_effect
+from py.case_type_bar import plot_case_type
+from py.income_dot_map import plot_income_dot_map
+from py.income_choropleth import plot_income_choropleth
+from py.subset_selection_plot import plot_subset_selection
+
+```
+
+
+> **"Cities speak through their systems."**  
+> This dashboard listens closely to what San Francisco's 311 requests reveal — about equity, efficiency, and responsiveness.
+
+# Behind Every Service Request, a Story
+
+When a streetlight goes dark or a sidewalk cracks, a resident might reach for their phone and dial 311. In doing so, they become a data point — one of over half a million calls made in San Francisco between 2012 and 2018.
+
+But who gets help fastest? Where does the system lag — and why?
+
+This dashboard explores the people, patterns, and disparities embedded in city service data. Scroll to uncover the story.
+
+<div class="center-image">
+  <img src="assets/images/pothole_example.jpg" alt="311 request example">
+</div>
+
+<div class="section-break"></div>
+
+## Resolution Rates by Neighborhood
+
+This interactive map visualizes how well each neighborhood's requests are resolved. Try toggling between requests **with** and **without** photo evidence to see the impact.
+
+<iframe src="outputs/resolution_map.html" class="iframe-viz"></iframe>
+
+<div class="section-break"></div>
+
+## The Power of Photo Evidence
+
+Cases with photos are resolved nearly **30% faster** on average. This bar chart makes the difference clear:
+
+<div class="chart-container" id="photo-effect-chart">
+
+```{python}
+plot_photo_effect()
+```
+
+</div>
+
+<div class="download-link">
+  <a href="outputs/photo_effect_chart.html" download>Download interactive chart as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## Which Case Types Get Resolved?
+
+Some services are handled efficiently; others fall through the cracks. This chart ranks the top 10 case types by resolution rate.
+
+<div class="chart-container" id="case-type-chart">
+
+```{python}
+plot_case_type()
+```
+
+</div>
+
+<div class="download-link">
+  <a href="outputs/case_type_chart.html" download>Download interactive chart as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## Income Disparities Across Neighborhoods
+
+Hover over this dot map to see average income by neighborhood. How does income relate to resolution speed?
+
+<div class="chart-container" id="income-dot-map">
+
+```{python}
+plot_income_dot_map()
+```
+
+</div>
+
+<div class="download-link">
+  <a href="outputs/income_dot_map.html" download>Download interactive chart as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## Income Distribution: Choropleth Map
+
+A broader look at geographic inequality in income levels:
+
+```{python}
+plot_income_choropleth()
+```
+
+
+<div class="download-link">
+  <a href="outputs/income_choropleth.html" download>Download map as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## Subset Selection: The Most Predictive Features
+
+Using R² and BIC, we identify the most impactful predictors of resolution success.
+
+<div class="chart-container" id="subset-selection-chart">
+
+```{python}
+plot_subset_selection()
+```
+
+</div>
+
+<div class="download-link">
+  <a href="outputs/subset_selection_chart.html" download>Download interactive chart as HTML</a>
+</div>
+
+<div class="section-break"></div>
+
+## Key Takeaways
+
+<div class="key-takeaways">
+  <div class="key-point">Photo evidence speeds up service.</div>
+  <div class="key-point">Resolution rates are uneven across income and racial lines.</div>
+  <div class="key-point">Case type matters — some requests are much more likely to be resolved.</div>
+</div>
+
+<div class="section-break"></div>
+
+## Why This Matters
+
+Municipal data isn't just numbers. It's a record of who gets served, and who doesn't. In a city striving for equity, these patterns must be visible — so they can be challenged and changed.
+
+<div class="section-break"></div>
+
+## Scan to View on Mobile
+
+<div class="qr-container">
+  <img src="assets/images/qr_code.jpg" alt="QR code to open dashboard">
+  <p>Scan to view this dashboard on your phone</p>
+</div>

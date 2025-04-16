@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head><meta charset="utf-8"/><title>Income Dot Map – 311 Explorer</title><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/vega@5" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6" type="text/javascript"></script>
+</head>
+<body>
+<div id="vis"></div>
+<script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": "transparent"}, "axis": {"domain": false, "grid": false, "labels": false, "ticks": false, "title": null}, "legend": {"labelFontSize": 12, "orient": "bottom", "titleFontSize": 13}, "title": {"anchor": "start", "fontSize": 16}}, "data": {"name": "data-3291e99741ab82249a519e0010a99a6c"}, "mark": {"type": "circle", "size": 200}, "encoding": {"color": {"field": "income", "scale": {"scheme": "viridis"}, "title": "Income ($)", "type": "quantitative"}, "latitude": {"field": "lat", "type": "quantitative"}, "longitude": {"field": "lon", "type": "quantitative"}, "size": {"field": "resolution_time", "scale": {"range": [100, 500]}, "title": "Avg. Resolution Time (hrs)", "type": "quantitative"}, "tooltip": [{"field": "neighborhood", "title": "Neighborhood", "type": "nominal"}, {"field": "income", "format": "$,.0f", "title": "Income ($)", "type": "quantitative"}, {"field": "resolution_rate", "format": ".1%", "title": "Resolution Rate", "type": "quantitative"}]}, "height": 400, "title": "Income and Resolution Time by Neighborhood", "width": "container", "$schema": "https://vega.github.io/schema/vega-lite/v5.16.3.json", "datasets": {"data-3291e99741ab82249a519e0010a99a6c": [{"neighborhood": "Bayview", "income": 55935.07960051267, "latitude": 37.733344997012615, "longitude": -122.39064131286536}, {"neighborhood": "Bernal Heights", "income": 112654.11344861558, "latitude": 37.74255516429088, "longitude": -122.41610942159964}, {"neighborhood": "Chinatown", "income": 22902.315240149073, "latitude": 37.79472958645534, "longitude": -122.40671227999664}, {"neighborhood": "Excelsior", "income": 77859.91762315684, "latitude": 37.722000643226096, "longitude": -122.43148383631032}, {"neighborhood": "Haight Ashbury", "income": 137397.10099915168, "latitude": 37.76925000722688, "longitude": -122.44987569873692}, {"neighborhood": "Inner Richmond", "income": 89707.27563338893, "latitude": 37.78016524930109, "longitude": -122.4678306296561}, {"neighborhood": "Inner Sunset", "income": 116354.23979514734, "latitude": 37.763293065841104, "longitude": -122.46724594338072}, {"neighborhood": "Marina", "income": 133465.11028844386, "latitude": 37.80197980775032, "longitude": -122.43690603502664}, {"neighborhood": "Mission", "income": 95859.86279730248, "latitude": 37.75904723908348, "longitude": -122.4126813004482}, {"neighborhood": "Noe Valley", "income": 141319.04570145384, "latitude": 37.74816177836389, "longitude": -122.43045992899285}, {"neighborhood": "Outer Mission", "income": 86144.60316123214, "latitude": 37.71132456314765, "longitude": -122.45355496991095}, {"neighborhood": "Outer Richmond", "income": 82841.44084979784, "latitude": 37.77800697431421, "longitude": -122.49192986465786}, {"neighborhood": "Pacific Heights", "income": 127198.04129563949, "latitude": 37.79176776489015, "longitude": -122.43076392049512}, {"neighborhood": "Portola", "income": 81521.79288897893, "latitude": 37.72753860583671, "longitude": -122.4060517908671}, {"neighborhood": "Potrero Hill", "income": 157056.35024153438, "latitude": 37.75566389367845, "longitude": -122.40185308699566}, {"neighborhood": "Presidio Heights", "income": 130831.3219073152, "latitude": 37.78839441217158, "longitude": -122.45112271306012}, {"neighborhood": "Seacliff", "income": 163483.17458563537, "latitude": 37.785860567845305, "longitude": -122.48858917265191}, {"neighborhood": "South of Market", "income": 67632.41546080225, "latitude": 37.77722457844525, "longitude": -122.40955740324868}, {"neighborhood": "Visitacion Valley", "income": 55268.653276259465, "latitude": 37.713485450826475, "longitude": -122.40721471826365}, {"neighborhood": "Western Addition", "income": 68774.68881264805, "latitude": 37.779779172715145, "longitude": -122.43608611130396}]}};
+      var embedOpt = {"actions": true, "renderer": "svg", "scaleFactor": 2, "downloadFileName": "income_dot_map", "theme": "light", "mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
