@@ -23,8 +23,15 @@
   .chart-container {
     width: 100%;
     min-height: 400px;
+    height: 450px;
     margin: 1.5rem 0;
     position: relative;
+    overflow: visible;
+  }
+  
+  .chart-container > div {
+    width: 100%;
+    height: 100%;
   }
   
   .iframe-viz {
@@ -47,9 +54,16 @@
   }
   
   .iframe-container iframe {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     border: none;
+    overflow: hidden;
+  }
+  
+  /* Make sure Vega-embed containers take full width and height */
+  .vega-embed {
+    width: 100% !important;
+    height: 100% !important;
   }
   
   /* Download links */
@@ -137,6 +151,10 @@
       height: 450px;
     }
     
+    .chart-container {
+      height: 350px;
+    }
+    
     .download-link {
       margin-bottom: 2rem;
     }
@@ -150,6 +168,10 @@
     .iframe-viz,
     .iframe-container {
       height: 350px;
+    }
+    
+    .chart-container {
+      height: 300px;
     }
     
     .key-takeaways {
