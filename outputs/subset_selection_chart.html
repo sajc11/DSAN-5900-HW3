@@ -1,234 +1,42 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Subset Selection – 311 Explorer</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <style>
-      #vis.vega-embed {
-        width: 100%;
-        display: flex;
-      }
+<head><meta charset="utf-8"/><title>Subset Selection – 311 Explorer</title><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
 
-      #vis.vega-embed details,
-      #vis.vega-embed details summary {
-        position: relative;
-      }
-    </style>
-    <script
-      src="https://cdn.jsdelivr.net/npm/vega@5"
-      type="text/javascript"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"
-      type="text/javascript"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/vega-embed@6"
-      type="text/javascript"
-    ></script>
-  </head>
-  <body>
-    <div id="vis"></div>
-    <script>
-      (function (vegaEmbed) {
-        var spec = {
-          config: {
-            view: { continuousWidth: 300, continuousHeight: 300, stroke: null },
-            axis: { grid: false },
-            legend: { disable: true },
-            title: { anchor: "start", fontSize: 16 },
-          },
-          hconcat: [
-            {
-              layer: [
-                {
-                  mark: { type: "line", point: true },
-                  encoding: {
-                    tooltip: [
-                      {
-                        field: "num_features",
-                        title: "Number of Features",
-                        type: "quantitative",
-                      },
-                      {
-                        field: "r_squared",
-                        format: ".2f",
-                        title: "R\u00b2",
-                        type: "quantitative",
-                      },
-                    ],
-                    x: {
-                      axis: { labelFontSize: 12 },
-                      field: "num_features",
-                      title: "Number of Features",
-                      type: "quantitative",
-                    },
-                    y: {
-                      axis: { format: ".2f", labelFontSize: 12 },
-                      field: "r_squared",
-                      title: "R\u00b2",
-                      type: "quantitative",
-                    },
-                  },
-                  title: "R\u00b2 by Number of Features",
-                },
-                {
-                  mark: { type: "point", size: 80 },
-                  encoding: {
-                    color: {
-                      condition: { test: "datum.optimal", value: "#e63946" },
-                      value: "#4c78a8",
-                    },
-                    stroke: {
-                      condition: { test: "datum.optimal", value: "black" },
-                      value: null,
-                    },
-                    strokeWidth: {
-                      condition: { test: "datum.optimal", value: 1 },
-                      value: 0,
-                    },
-                    tooltip: [
-                      {
-                        field: "num_features",
-                        title: "Number of Features",
-                        type: "quantitative",
-                      },
-                      {
-                        field: "r_squared",
-                        format: ".2f",
-                        title: "R\u00b2",
-                        type: "quantitative",
-                      },
-                      {
-                        field: "optimal",
-                        title: "Optimal Model",
-                        type: "nominal",
-                      },
-                    ],
-                    x: { field: "num_features", type: "quantitative" },
-                    y: { field: "r_squared", type: "quantitative" },
-                  },
-                },
-              ],
-              height: 300,
-              width: 320,
-            },
-            {
-              layer: [
-                {
-                  mark: { type: "line", point: false },
-                  encoding: {
-                    tooltip: [
-                      {
-                        field: "num_features",
-                        title: "Number of Features",
-                        type: "quantitative",
-                      },
-                      {
-                        field: "bic",
-                        format: ".1f",
-                        title: "BIC",
-                        type: "quantitative",
-                      },
-                    ],
-                    x: {
-                      axis: { labelFontSize: 12 },
-                      field: "num_features",
-                      title: "Number of Features",
-                      type: "quantitative",
-                    },
-                    y: {
-                      axis: { format: ".1f", labelFontSize: 12 },
-                      field: "bic",
-                      title: "BIC",
-                      type: "quantitative",
-                    },
-                  },
-                  title: "BIC by Number of Features",
-                },
-                {
-                  mark: { type: "point", size: 80 },
-                  encoding: {
-                    color: {
-                      condition: { test: "datum.optimal", value: "#e63946" },
-                      value: "crimson",
-                    },
-                    stroke: {
-                      condition: { test: "datum.optimal", value: "black" },
-                      value: null,
-                    },
-                    strokeWidth: {
-                      condition: { test: "datum.optimal", value: 1 },
-                      value: 0,
-                    },
-                    tooltip: [
-                      {
-                        field: "num_features",
-                        title: "Number of Features",
-                        type: "quantitative",
-                      },
-                      {
-                        field: "bic",
-                        format: ".1f",
-                        title: "BIC",
-                        type: "quantitative",
-                      },
-                      {
-                        field: "optimal",
-                        title: "Optimal Model",
-                        type: "nominal",
-                      },
-                    ],
-                    x: { field: "num_features", type: "quantitative" },
-                    y: { field: "bic", type: "quantitative" },
-                  },
-                },
-              ],
-              height: 300,
-              width: 320,
-            },
-          ],
-          data: { name: "data-983ae44c99039d42d6784ab3551830d8" },
-          resolve: { scale: { y: "independent" } },
-          $schema: "https://vega.github.io/schema/vega-lite/v5.16.3.json",
-          datasets: {
-            "data-983ae44c99039d42d6784ab3551830d8": [
-              { num_features: 1, r_squared: 0.23, bic: 150.1, optimal: false },
-              { num_features: 2, r_squared: 0.41, bic: 130.4, optimal: false },
-              { num_features: 3, r_squared: 0.55, bic: 115.3, optimal: false },
-              { num_features: 4, r_squared: 0.62, bic: 110.7, optimal: false },
-              { num_features: 5, r_squared: 0.68, bic: 109.2, optimal: true },
-              { num_features: 6, r_squared: 0.69, bic: 109.9, optimal: false },
-            ],
-          },
-        };
-        var embedOpt = {
-          actions: true,
-          renderer: "svg",
-          scaleFactor: 2,
-          downloadFileName: "subset_selection_chart",
-          theme: "light",
-          mode: "vega-lite",
-        };
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/vega@5" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6" type="text/javascript"></script>
+</head>
+<body>
+<div id="vis"></div>
+<script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": null}, "axis": {"grid": false}, "legend": {"disable": true}, "title": {"anchor": "start", "fontSize": 16}}, "hconcat": [{"layer": [{"mark": {"type": "line", "point": true}, "encoding": {"tooltip": [{"field": "num_features", "title": "Number of Features", "type": "quantitative"}, {"field": "r_squared", "format": ".2f", "title": "R\u00b2", "type": "quantitative"}], "x": {"axis": {"labelFontSize": 12}, "field": "num_features", "title": "Number of Features", "type": "quantitative"}, "y": {"axis": {"format": ".2f", "labelFontSize": 12}, "field": "r_squared", "title": "R\u00b2", "type": "quantitative"}}, "title": "R\u00b2 by Number of Features"}, {"mark": {"type": "point", "size": 80}, "encoding": {"color": {"condition": {"test": "datum.optimal", "value": "#e63946"}, "value": "#4c78a8"}, "stroke": {"condition": {"test": "datum.optimal", "value": "black"}, "value": null}, "strokeWidth": {"condition": {"test": "datum.optimal", "value": 1}, "value": 0}, "tooltip": [{"field": "num_features", "title": "Number of Features", "type": "quantitative"}, {"field": "r_squared", "format": ".2f", "title": "R\u00b2", "type": "quantitative"}, {"field": "optimal", "title": "Optimal Model", "type": "nominal"}], "x": {"field": "num_features", "type": "quantitative"}, "y": {"field": "r_squared", "type": "quantitative"}}}], "height": 300, "width": 320}, {"layer": [{"mark": {"type": "line", "point": false}, "encoding": {"tooltip": [{"field": "num_features", "title": "Number of Features", "type": "quantitative"}, {"field": "bic", "format": ".1f", "title": "BIC", "type": "quantitative"}], "x": {"axis": {"labelFontSize": 12}, "field": "num_features", "title": "Number of Features", "type": "quantitative"}, "y": {"axis": {"format": ".1f", "labelFontSize": 12}, "field": "bic", "title": "BIC", "type": "quantitative"}}, "title": "BIC by Number of Features"}, {"mark": {"type": "point", "size": 80}, "encoding": {"color": {"condition": {"test": "datum.optimal", "value": "#e63946"}, "value": "crimson"}, "stroke": {"condition": {"test": "datum.optimal", "value": "black"}, "value": null}, "strokeWidth": {"condition": {"test": "datum.optimal", "value": 1}, "value": 0}, "tooltip": [{"field": "num_features", "title": "Number of Features", "type": "quantitative"}, {"field": "bic", "format": ".1f", "title": "BIC", "type": "quantitative"}, {"field": "optimal", "title": "Optimal Model", "type": "nominal"}], "x": {"field": "num_features", "type": "quantitative"}, "y": {"field": "bic", "type": "quantitative"}}}], "height": 300, "width": 320}], "data": {"name": "data-983ae44c99039d42d6784ab3551830d8"}, "resolve": {"scale": {"y": "independent"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.16.3.json", "datasets": {"data-983ae44c99039d42d6784ab3551830d8": [{"num_features": 1, "r_squared": 0.23, "bic": 150.1, "optimal": false}, {"num_features": 2, "r_squared": 0.41, "bic": 130.4, "optimal": false}, {"num_features": 3, "r_squared": 0.55, "bic": 115.3, "optimal": false}, {"num_features": 4, "r_squared": 0.62, "bic": 110.7, "optimal": false}, {"num_features": 5, "r_squared": 0.68, "bic": 109.2, "optimal": true}, {"num_features": 6, "r_squared": 0.69, "bic": 109.9, "optimal": false}]}};
+      var embedOpt = {"actions": true, "renderer": "svg", "scaleFactor": 2, "downloadFileName": "subset_selection_chart", "theme": "light", "mode": "vega-lite"};
 
-        function showError(el, error) {
-          el.innerHTML =
-            '<div style="color:red;">' +
-            "<p>JavaScript Error: " +
-            error.message +
-            "</p>" +
-            "<p>This usually means there's a typo in your chart specification. " +
-            "See the javascript console for the full traceback.</p>" +
-            "</div>";
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
           throw error;
-        }
-        const el = document.getElementById("vis");
-        vegaEmbed("#vis", spec, embedOpt).catch((error) =>
-          showError(el, error)
-        );
-      })(vegaEmbed);
-    </script>
-  </body>
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
 </html>
