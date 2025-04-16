@@ -12,31 +12,45 @@ resources:
   - js/quiz.js
   - js/d3.v7.js
   - js/gallery.js
-  - "!data/311_map_data.csv"   # 🚫 EXCLUDE this
+  - "!data/311_map_data.csv"              # Exclude large file from publish
   - data/neighborhood_income_centroids.csv
   - data/SF_Find_Neighborhoods_2025.geojson
   - data/data_gallery_info.json
   - assets/images/
   - outputs/
   - includes/footer.html
-  - styles/  # Add this line to include all CSS files
+  - styles/
+  - scripts/copy_large_data.sh            # ← Optional if you want it preserved in _site
+
+language: 
+  search-text-placeholder: Search...
+
 
 website:
   title: "311 Resolution Explorer"
-  navbar:
+  description: "An interactive web application to explore 311 resolution data in San Francisco."  
+  back-to-top-navigation: true
+  page-navigation: true
+  navbar: 
+    dashboard: true
+    align: center
+    collapse: false
+    pinned: true
+    color: "#2c3e50"
+    text-color: "#c3d6d6"
     left:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
-        text: About
+      - text: Home
+        href: index.qmd
+      - text: About
+        href: about.qmd
       - text: Analysis
         menu:
-          - href: methods.qmd
-            text: Methods
-          - href: quiz.qmd
-            text: Quiz
-          - href: gallery.qmd
-            text: Gallery
+          - text: Methods
+            href: methods.qmd
+          - text: Quiz
+            href: quiz.qmd
+          - text: Gallery
+            href: gallery.qmd
       - text: Resources
         menu:
           - text: "📄 Download Full Paper (PDF)"
@@ -47,12 +61,18 @@ website:
         icon: github
         href: https://github.com/anly512/5300-project-group-9
         target: _blank
-  page-navigation: true
+  search: 
+    location: navbar
+    keyboard-shortcut: "ctrl+f"
+    type: overlay
 
 format:
   html:
-    theme: cosmo
-    css: styles/custom.css
+    theme: flatly
+    highlight: tango
+    css: 
+      - styles/custom.css
+      - styles/dashboard-page.css
     toc: true
     toc-depth: 2
     code-fold: true

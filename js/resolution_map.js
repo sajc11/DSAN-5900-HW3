@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+define(["d3"], function(d3) {
+    document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ resolution_map.js loaded");
   
     const container = d3.select("#map-container");
@@ -91,8 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // Redraw with new filter
             Promise.all([
-              d3.csv("../data/311_map_data.csv"),
-              d3.json("../data/SF_Find_Neighborhoods_2025.geojson")
+              d3.csv("data/311_map_data.csv"),
+              d3.json("data/SF_Find_Neighborhoods_2025.geojson")
             ]).then(([data, geo]) => {
               data.forEach(d => {
                 d.latitude = +d.latitude;
@@ -118,8 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // Redraw with new filter
             Promise.all([
-              d3.csv("../data/311_map_data.csv"),
-              d3.json("../data/SF_Find_Neighborhoods_2025.geojson")
+              d3.csv("data/311_map_data.csv"),
+              d3.json("data/SF_Find_Neighborhoods_2025.geojson")
             ]).then(([data, geo]) => {
               data.forEach(d => {
                 d.latitude = +d.latitude;
@@ -298,3 +299,4 @@ document.addEventListener("DOMContentLoaded", function () {
         .text("Resolution Rate");
     }
   });
+});

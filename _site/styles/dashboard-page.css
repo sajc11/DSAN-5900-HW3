@@ -23,8 +23,15 @@
   .chart-container {
     width: 100%;
     min-height: 400px;
+    height: 450px;
     margin: 1.5rem 0;
     position: relative;
+    overflow: visible;
+  }
+  
+  .chart-container > div {
+    width: 100%;
+    height: 100%;
   }
   
   .iframe-viz {
@@ -33,6 +40,30 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Iframe container specifically for maps and other full-width visualizations */
+  .iframe-container {
+    width: 100%;
+    height: 650px;
+    margin: 1.5rem 0;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .iframe-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+    overflow: hidden;
+  }
+  
+  /* Make sure Vega-embed containers take full width and height */
+  .vega-embed {
+    width: 100% !important;
+    height: 100% !important;
   }
   
   /* Download links */
@@ -67,10 +98,20 @@
   }
   
   /* Key points styling */
+  .key-takeaways {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
   .key-point {
     margin: 1rem 0;
     padding-left: 1.5rem;
     position: relative;
+    font-size: 1.1rem;
+    color: #333;
   }
   
   .key-point:before {
@@ -90,6 +131,7 @@
     width: 160px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   
   .qr-container p {
@@ -104,11 +146,35 @@
       max-width: 90%;
     }
     
-    .iframe-viz {
+    .iframe-viz, 
+    .iframe-container {
       height: 450px;
+    }
+    
+    .chart-container {
+      height: 350px;
     }
     
     .download-link {
       margin-bottom: 2rem;
+    }
+    
+    .key-point {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .iframe-viz,
+    .iframe-container {
+      height: 350px;
+    }
+    
+    .chart-container {
+      height: 300px;
+    }
+    
+    .key-takeaways {
+      padding: 0.8rem;
     }
   }

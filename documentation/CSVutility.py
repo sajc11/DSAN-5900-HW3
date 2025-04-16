@@ -1,7 +1,11 @@
 import pandas as pd
+import os
 
 # Load the existing 311_map_data.csv to reconstruct the neighborhood_income_centroids.csv
-df = pd.read_csv("./data/311_map_data.csv")
+
+csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "311_map_data.csv"))
+df = pd.read_csv(csv_path)
+
 
 # Group by neighborhood to calculate average income and centroid (if needed)
 # This assumes 311_map_data.csv includes the income field (if not, this will fail)

@@ -129,6 +129,14 @@
     font-weight: bold;
   }
   
+  .iframe-viz {
+    width: 100%;
+    height: 650px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .toggle {
@@ -165,4 +173,16 @@
     .map-title {
       font-size: 14px;
     }
+
+    .iframe-viz {
+      height: 450px;
+      width: 90%;
+    }
   }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  

@@ -643,4 +643,9 @@
       align-items: center;
       gap: 1rem;
     }
-  }
+  }/* Fix overlap with Quarto navbar */
+.game-selector,
+.game-container,
+.match-game {
+  margin-top: 80px; /* Push content below the sticky navbar */
+}

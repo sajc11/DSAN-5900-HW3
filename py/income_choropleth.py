@@ -4,24 +4,45 @@ import folium
 import pandas as pd
 import geopandas as gpd
 import os
+import json
 from utils.html_postprocess import fix_html_metadata
 
 def plot_income_choropleth():
     """
-    Creates a choropleth map of income by neighborhood in San Francisco.
+    Creates a full-screen choropleth map that works well in iframes.
     Returns the path to the HTML file.
     """
-    # Load data
-    df = pd.read_csv("data/neighborhood_income_centroids.csv")
-    sf_geo = gpd.read_file("data/SF_Find_Neighborhoods_2025.geojson")
+    # Load the neighborhood income data
+    try:
+        # First try the standard path
+        df = pd.read_csv("data/neighborhood_income_centroids.csv")
+    except FileNotFoundError:
+        try:
+            # Try a path relative to the current file
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            df = pd.read_csv(os.path.join(current_dir, "..", "data", "neighborhood_income_centroids.csv"))
+        except FileNotFoundError:
+            # Last resort: try direct path relative to the parent directory
+            df = pd.read_csv("../data/neighborhood_income_centroids.csv")
+    
+    # Load the geojson data
+    try:
+        sf_geo = gpd.read_file("data/SF_Find_Neighborhoods_2025.geojson")
+    except FileNotFoundError:
+        try:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            sf_geo = gpd.read_file(os.path.join(current_dir, "..", "data", "SF_Find_Neighborhoods_2025.geojson"))
+        except FileNotFoundError:
+            sf_geo = gpd.read_file("../data/SF_Find_Neighborhoods_2025.geojson")
+    
+    # Print debug info
+    print(f"Successfully loaded income data with {len(df)} rows")
+    print(f"Successfully loaded geo data with {len(sf_geo)} features")
 
     # Merge data
     sf_geo = sf_geo.merge(df, left_on='name', right_on='neighborhood')
-
-    # Make sure output directory exists
-    os.makedirs("outputs", exist_ok=True)
-
-    # Create map
+    
+    # Create a folium map
     m = folium.Map(
         location=[37.76, -122.44], 
         zoom_start=12, 
@@ -41,8 +62,7 @@ def plot_income_choropleth():
         line_opacity=0.3,
         line_color="gray",
         legend_name="Average Income ($)",
-        highlight=True,
-        smooth_factor=1.0
+        highlight=True
     ).add_to(m)
     
     # Add tooltip layer
@@ -54,72 +74,87 @@ def plot_income_choropleth():
             localize=True,
             sticky=False,
             labels=True,
-            style=("background-color: white; color: #333; font-family: Arial, sans-serif; "
-                  "font-size: 12px; padding: 8px; border-radius: 4px; box-shadow: 0 1px 5px rgba(0,0,0,0.15);")
+            style="background-color: white; color: #333; font-size: 12px; padding: 6px;"
         ),
         style_function=lambda x: {
-            'fillOpacity': 0,
+            'fillColor': 'transparent',
+            'color': 'white',
             'weight': 1.5,
-            'color': 'white'
+            'fillOpacity': 0.0
         }
     ).add_to(m)
-
-    # Add a title
-    title_html = '''
-        <div style="position: fixed; 
-                    top: 10px; 
-                    left: 50%; 
-                    transform: translateX(-50%);
-                    z-index: 9999; 
-                    background-color: white; 
-                    padding: 10px; 
-                    border-radius: 5px;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                    font-family: Arial, sans-serif;
-                    font-size: 16px;
-                    font-weight: bold;">
-            Income Distribution Across San Francisco Neighborhoods
-        </div>
-    '''
-    m.get_root().html.add_child(folium.Element(title_html))
-
-    # Save to file
+    
+    # Make sure output directory exists
+    os.makedirs("outputs", exist_ok=True)
+    
+    # Create a custom HTML file with reliable full-screen behavior
     output_path = "outputs/income_choropleth.html"
-    m.save(output_path)
     
-    # Improve the HTML
-    fix_html_metadata(output_path, title_text="Income Choropleth – 311 Explorer")
+    # Get the HTML template
+    template_path = os.path.join(os.path.dirname(__file__), "templates", "choropleth_template.html")
     
-    # Add custom CSS to make the map responsive
-    with open(output_path, 'r', encoding='utf-8') as file:
-        content = file.read()
-    
-    responsive_css = '''
+    # If template doesn't exist, create a simple template
+    if not os.path.exists(template_path):
+        template = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Choropleth – 311 Explorer</title>
     <style>
         html, body {
             width: 100%;
             height: 100%;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
-        .folium-map {
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
         }
-        @media (max-width: 768px) {
-            .info.legend {
-                font-size: 10px;
-                padding: 6px;
-            }
-        }
     </style>
-    '''
+    <!-- Folium required resources -->
+    {{resources}}
+</head>
+<body>
+    <div id="map"></div>
     
-    if '</head>' in content:
-        head_end = content.find('</head>')
-        content = content[:head_end] + responsive_css + content[head_end:]
-        
-        with open(output_path, 'w', encoding='utf-8') as file:
-            file.write(content)
-
+    <script>
+        {{script}}
+    </script>
+</body>
+</html>
+        """
+    else:
+        with open(template_path, 'r') as f:
+            template = f.read()
+    
+    # Save the map as string
+    map_html = m.get_root().render()
+    
+    # Extract required resources (CSS and JS)
+    resources = ""
+    for line in map_html.split('\n'):
+        if ('<link' in line and 'href' in line) or ('<script' in line and 'src' in line):
+            resources += line + '\n'
+    
+    # Extract the script part
+    start_marker = '<script>'
+    end_marker = '</script>'
+    script_start = map_html.find(start_marker) + len(start_marker)
+    script_end = map_html.rfind(end_marker)
+    script = map_html[script_start:script_end].strip()
+    
+    # Replace placeholders in template
+    html_content = template.replace('{{resources}}', resources).replace('{{script}}', script)
+    
+    # Write the custom HTML file
+    with open(output_path, 'w') as f:
+        f.write(html_content)
+    
     return output_path

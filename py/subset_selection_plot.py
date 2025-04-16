@@ -17,6 +17,9 @@ def plot_subset_selection():
         'bic': [150.1, 130.4, 115.3, 110.7, 109.2, 109.9]
     })
 
+    # Print debug info
+    print(f"Creating subset selection plot with {len(data)} data points")
+
     # Add a column to highlight the optimal point (minimum BIC)
     data['optimal'] = data['bic'] == data['bic'].min()
     
@@ -145,7 +148,10 @@ def plot_subset_selection():
     chart.save(html_path, embed_options=embed_options)
     
     # Use your existing HTML postprocessor
-    fix_html_metadata(html_path, title_text="Subset Selection – 311 Explorer")
+    try:
+        fix_html_metadata(html_path, title_text="Subset Selection – 311 Explorer")
+    except Exception as e:
+        print(f"Warning: Could not fix HTML metadata: {e}")
 
     # Return the chart object for Quarto to render inline
     return chart

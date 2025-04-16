@@ -1,0 +1,7 @@
+/.quarto/
+
+# Ignore built site
+_site/
+
+# Ignore copied LFS data
+_site/data/311_map_data.csv

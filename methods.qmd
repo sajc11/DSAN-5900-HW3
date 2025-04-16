@@ -3,40 +3,85 @@ title: "Methods"
 format:
   html:
     embed-resources: true
-    self-contained: true
     toc: true
     toc-depth: 3
     css: 
       - styles/custom.css
-      - styles/methods-page.css
+      - styles/about-page.css
+      - styles/dashboard-page.css
+    self-contained: true
     include-in-header:
       text: |
         <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+        <style>
+          /* Critical styles for visualization containers */
+          .chart-container {
+            width: 100%;
+            height: 550px;
+            min-height: 400px;
+            margin: 1.5rem 0;
+          }
+          
+          .iframe-container {
+            width: 100%;
+            height: 650px;
+            margin: 1.5rem 0;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+          }
+          
+          .iframe-container iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: none;
+          }
+          
+          .vega-embed {
+            width: 100%;
+            height: 100%;
+          }
+          
+          .iframe-viz {
+            width: 100%;
+            height: 500px;
+            border: none;
+            overflow: hidden;
+          }
+        </style>
 execute:
   echo: false
   warning: false
   error: false
 ---
 
+
 ```{python}
-# Initialize Altair for proper rendering
-import altair as alt
+#| include: false
+import sys
 import os
+import altair as alt
 
-# Set renderer to default for Quarto/Jupyter compatibility
+# Set up path and environment
+sys.path.append(os.path.abspath("."))
 alt.renderers.enable('default')
-
-# Ensure output directory exists
 os.makedirs("outputs", exist_ok=True)
 
-# Import visualization modules
+# Import visualization functions
 from py.photo_effect_plot import plot_photo_effect
 from py.case_type_bar import plot_case_type
 from py.income_dot_map import plot_income_dot_map
 from py.income_choropleth import plot_income_choropleth
 from py.subset_selection_plot import plot_subset_selection
+
+# Pre-generate all HTML files to ensure they exist
+_ = plot_photo_effect()
+_ = plot_case_type()
+_ = plot_income_dot_map()
+_ = plot_income_choropleth()
+_ = plot_subset_selection()
 ```
 
 # Behind the Dashboard: Our Analytical Journey
@@ -117,11 +162,7 @@ We needed to go deeper.
 
 We tested dozens of combinations to balance complexity and explanatory power.
 
-<div class="visualization-container">
-```{python}
-plot_subset_selection()
-```
-</div>
+<iframe src="outputs/subset_selection_chart.html" class="iframe-viz" style="height: 450px; overflow: hidden;"></iframe>
 
 <div class="download-link">
   <a href="outputs/subset_selection_chart.html" download>Download interactive chart as HTML</a>
@@ -138,27 +179,20 @@ Place matters.
   <p><strong>Dot Map</strong> - Shows income per neighborhood at its centroid</p>
 </div>
 
-<div class="visualization-container">
-```{python}
-plot_income_dot_map()
-```
-</div>
+<iframe src="outputs/income_dot_map.html" class="iframe-viz" style="height: 600px;"></iframe>
 
 <div class="download-link">
-  <a href="outputs/income_dot_map.html" download>Download interactive map as HTML</a>
+  <a href="outputs/income_dot_map.html" download>Download interactive chart as HTML</a>
 </div>
+
+<div class="section-break"></div>
 
 <div class="method-box">
   <h4>Choropleth Mapping</h4>
   <p><strong>Choropleth</strong> - Visualizes income inequality across geographic boundaries</p>
 </div>
 
-<iframe 
-  src="outputs/income_choropleth.html" 
-  class="iframe-viz" 
-  sandbox="allow-scripts allow-same-origin"
-></iframe>
-
+<iframe src="outputs/income_choropleth.html" class="iframe-viz" style="width:100%; height:500px; border:none;"></iframe>
 
 <div class="download-link">
   <a href="outputs/income_choropleth.html" download>Download map as HTML</a>

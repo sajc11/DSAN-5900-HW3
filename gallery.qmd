@@ -9,6 +9,7 @@ format:
     css: 
       - styles/custom.css
       - styles/gallery-styles.css
+      - styles/dashboard-page.css
     include-in-header:
       text: |
         <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>

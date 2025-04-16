@@ -10,8 +10,12 @@ def plot_case_type():
     Creates a horizontal bar chart showing resolution rates by case type.
     Returns the chart object for rendering in Quarto.
     """
-    # Load data
-    df = pd.read_csv("data/311_map_data.csv")
+    # Load data using the specified method for the large file
+    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "311_map_data.csv"))
+    df = pd.read_csv(csv_path)
+    
+    # Print debug info
+    print(f"Successfully loaded data with {len(df)} rows")
 
     # Prepare data for plotting
     case_grouped = (
@@ -71,7 +75,10 @@ def plot_case_type():
     chart.save(html_path, embed_options=embed_options)
     
     # Use your existing HTML postprocessor
-    fix_html_metadata(html_path, title_text="Case Type Resolution – 311 Explorer")
+    try:
+        fix_html_metadata(html_path, title_text="Case Type Resolution – 311 Explorer")
+    except Exception as e:
+        print(f"Warning: Could not fix HTML metadata: {e}")
 
     # Return the chart object for Quarto to render inline
     return chart

@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Resolution Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/resolution_map.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="map-container"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 🔧 Mobile scaling -->
+  <title>311 Resolution Map</title>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/resolution_map.js"></script>
-  </body>
+  <!-- Link to your external CSS -->
+  <link rel="stylesheet" href="../styles/resolution_map.css">
+
+  <!-- D3 & RequireJS (module loader) -->
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js"></script>
+  <script>
+    require.config({
+      paths: {
+        d3: "https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min"
+      }
+    });
+    require(["../js/resolution_map.js"]);
+  </script>
+
+  <!-- Optional: fallback style in case resolution_map.css doesn’t load -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      background-color: #f5f7fa;
+    }
+  </style>
+</head>
+<body>
+  <div id="map-container"></div>
+</body>
 </html>

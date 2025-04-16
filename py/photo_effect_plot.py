@@ -10,8 +10,12 @@ def plot_photo_effect():
     Creates a bar chart showing resolution time with and without photo evidence.
     Returns the chart object for rendering in Quarto.
     """
-    # Load data
-    df = pd.read_csv("data/311_map_data.csv")
+    # Load data using the specified method for the large file
+    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "311_map_data.csv"))
+    df = pd.read_csv(csv_path)
+    
+    # Print debug info
+    print(f"Successfully loaded data with {len(df)} rows")
 
     # Prepare data for plotting
     plot_df = (
@@ -25,20 +29,8 @@ def plot_photo_effect():
         1: "With Photo"
     })
     
-    # Calculate percentage difference
-    with_photo = plot_df.loc[plot_df['photo.dumm'] == 1, 'avg_time'].values[0]
-    no_photo = plot_df.loc[plot_df['photo.dumm'] == 0, 'avg_time'].values[0]
-    percent_diff = (no_photo - with_photo) / no_photo * 100
-    
-    # Add annotation data
-    annotation_df = pd.DataFrame({
-        'x': ['With Photo'],
-        'y': [with_photo + 50],  # Position slightly above the bar
-        'text': [f"{percent_diff:.0f}% faster"]
-    })
-
-    # Create the chart with improved configuration
-    bars = alt.Chart(plot_df).mark_bar(size=60).encode(
+    # Simple bar chart without annotation - more reliable rendering
+    chart = alt.Chart(plot_df).mark_bar().encode(
         x=alt.X("photo_label:N", 
                 title="", 
                 axis=alt.Axis(labelFontSize=13)),
@@ -52,23 +44,9 @@ def plot_photo_effect():
             alt.Tooltip("photo_label:N", title="Photo Evidence"),
             alt.Tooltip("avg_time:Q", format=".0f", title="Avg. Resolution Time (hrs)")
         ]
-    )
-    
-    # Add annotation for percentage difference
-    annotation = alt.Chart(annotation_df).mark_text(
-        fontSize=13,
-        fontWeight='bold',
-        color='#1f77b4'
-    ).encode(
-        x='x:N',
-        y='y:Q',
-        text='text:N'
-    )
-    
-    # Combine chart components
-    chart = (bars + annotation).properties(
+    ).properties(
         title="Photo Evidence Reduces Resolution Time",
-        width="container",
+        width=400,  # Fixed width instead of container
         height=300
     ).configure_axis(
         grid=False
@@ -96,7 +74,10 @@ def plot_photo_effect():
     chart.save(html_path, embed_options=embed_options)
     
     # Use your existing HTML postprocessor
-    fix_html_metadata(html_path, title_text="Photo Evidence – Resolution Explorer")
+    try:
+        fix_html_metadata(html_path, title_text="Photo Evidence – Resolution Explorer")
+    except Exception as e:
+        print(f"Warning: Could not fix HTML metadata: {e}")
 
     # Return the chart object for Quarto to render inline
     return chart
