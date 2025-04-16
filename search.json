@@ -74,35 +74,35 @@
     "href": "index.html#the-power-of-photo-evidence",
     "title": "311 Hotline Resolution Explorer",
     "section": "The Power of Photo Evidence",
-    "text": "The Power of Photo Evidence\nCases with photos are resolved nearly 30% faster on average. This bar chart makes the difference clear:\n\n  \n\n\n\n\nDownload interactive chart as HTML"
+    "text": "The Power of Photo Evidence\nCases with photos are resolved nearly 30% faster on average. This bar chart makes the difference clear:\n\n\n\nDownload interactive chart as HTML"
   },
   {
     "objectID": "index.html#which-case-types-get-resolved",
     "href": "index.html#which-case-types-get-resolved",
     "title": "311 Hotline Resolution Explorer",
     "section": "Which Case Types Get Resolved?",
-    "text": "Which Case Types Get Resolved?\nSome services are handled efficiently; others fall through the cracks. This chart ranks the top 10 case types by resolution rate.\n\n\n\nSuccessfully loaded data with 519919 rows\n\n\n\n\n\n\n\n\n\n\nDownload interactive chart as HTML"
+    "text": "Which Case Types Get Resolved?\nSome services are handled efficiently; others fall through the cracks. This chart ranks the top 10 case types by resolution rate.\n\n\n\nDownload interactive chart as HTML"
   },
   {
     "objectID": "index.html#income-disparities-across-neighborhoods",
     "href": "index.html#income-disparities-across-neighborhoods",
     "title": "311 Hotline Resolution Explorer",
     "section": "Income Disparities Across Neighborhoods",
-    "text": "Income Disparities Across Neighborhoods\nHover over this dot map to see average income by neighborhood. How does income relate to resolution speed?\n\n\n\nSuccessfully loaded income data with 20 rows\n\n\n\n\n\n\n\n\n\n\nDownload interactive chart as HTML"
+    "text": "Income Disparities Across Neighborhoods\nHover over this dot map to see average income by neighborhood. How does income relate to resolution speed?\n\n\n\nDownload interactive chart as HTML"
   },
   {
     "objectID": "index.html#income-distribution-choropleth-map",
     "href": "index.html#income-distribution-choropleth-map",
     "title": "311 Hotline Resolution Explorer",
     "section": "Income Distribution: Choropleth Map",
-    "text": "Income Distribution: Choropleth Map\nA broader look at geographic inequality in income levels:\n\n  \n\n\nDownload map as HTML"
+    "text": "Income Distribution: Choropleth Map\nA broader look at geographic inequality in income levels:\n\n\n\n\nDownload map as HTML"
   },
   {
     "objectID": "index.html#subset-selection-the-most-predictive-features",
     "href": "index.html#subset-selection-the-most-predictive-features",
     "title": "311 Hotline Resolution Explorer",
     "section": "Subset Selection: The Most Predictive Features",
-    "text": "Subset Selection: The Most Predictive Features\nUsing R² and BIC, we identify the most impactful predictors of resolution success.\n\n\n\nCreating subset selection plot with 6 data points\n\n\n\n\n\n\n\n\n\n\nDownload interactive chart as HTML"
+    "text": "Subset Selection: The Most Predictive Features\nUsing R² and BIC, we identify the most impactful predictors of resolution success.\n\n\n\nDownload interactive chart as HTML"
   },
   {
     "objectID": "index.html#key-takeaways",
