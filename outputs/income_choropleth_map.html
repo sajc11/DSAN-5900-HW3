@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Income Choropleth Map</title>
+
+  <!-- Fix: proper meta viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Optional: You can move styles to a separate CSS file if needed -->
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #fff;
+    }
+
+    #choropleth-map {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .tooltip {
+      position: absolute;
+      background-color: white;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      pointer-events: none;
+      font-size: 13px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="choropleth-map"></div>
+
+  <!-- External libraries -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../js/income_choropleth_map.js"></script>
+</body>
+</html>
